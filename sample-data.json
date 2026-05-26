@@ -1,0 +1,30 @@
+[
+  {
+    "title": "Go out and have fun",
+    "category": "Party",
+    "amount": 100,
+    "date": "2026-02-11",
+    "description": "musument park"
+  },
+  {
+    "title": "Dinner",
+    "category": "Food",
+    "amount": 50,
+    "date": "2026-03-21",
+    "description": "Red wine"
+  },
+  {
+    "title": "online game",
+    "category": "Entertainment",
+    "amount": 50,
+    "date": "2026-04-07",
+    "description": "GTA"
+  },
+  {
+    "title": "Dinner",
+    "category": "Food",
+    "amount": 25,
+    "date": "2026-04-08",
+    "description": "Pizza"
+  }
+]
