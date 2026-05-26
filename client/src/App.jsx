@@ -362,7 +362,9 @@ function App() {
 
           {/* Show empty state if there are no expenses */}
           {filteredExpenses.length === 0 ? (
-            <div className="empty-state">No expenses yet.</div>
+            <div className="empty-state">
+              {expenses.length === 0 ? "No expenses yet." : "No matching expenses found."}
+            </div>
           ) : (
             <div className="expense-list">
               {/* Loop through all expenses and render each item */}
