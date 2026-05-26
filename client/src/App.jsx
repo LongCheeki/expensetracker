@@ -197,17 +197,32 @@ function App() {
     setError("");
 
     // Basic front-end validation for required fields
-    if (!formData.title || !formData.category || !formData.amount || !formData.date) {
+    if (
+      !formData.title.trim() ||
+      !formData.category.trim() ||
+      !formData.amount ||
+      !formData.date
+    ) {
       setError("Please fill in all required fields.");
+      return;
+    }
+
+    const amountValue = Number(formData.amount);
+
+    if (Number.isNaN(amountValue) || amountValue <= 0) {
+      setError("Amount must be greater than 0.");
       return;
     }
 
     try {
       // Create a payload object to send to backend
-      // Convert amount from string to number
+      // Convert amount from string to number and remove extra spaces from text fields
       const payload = {
-        ...formData,
-        amount: Number(formData.amount),
+        title: formData.title.trim(),
+        category: formData.category.trim(),
+        amount: amountValue,
+        date: formData.date,
+        description: formData.description.trim(),
       };
 
       // If editingId exists, update an existing record
