@@ -33,6 +33,11 @@ function App() {
   // Store grouped summary data by month
   const [monthlySummary, setMonthlySummary] = useState([]);
 
+
+ // Store the current live search keyword
+  const [searchTerm, setSearchTerm] = useState("");
+
+
   // Store the id of the expense currently being edited
   // If null, the form is in "add" mode
   const [editingId, setEditingId] = useState(null);
@@ -94,6 +99,26 @@ function App() {
   // Calculate the total amount spent across all expenses
   // Number(...) ensures the amount is treated as a number
   const totalSpent = expenses.reduce((sum, expense) => sum + Number(expense.amount || 0), 0);
+
+
+  const filteredExpenses = useMemo(() => {
+  const keyword = searchTerm.trim().toLowerCase();
+
+  if (!keyword) {
+    return expenses;
+  }
+
+  return expenses.filter((expense) => {
+    return (
+      expense.title?.toLowerCase().includes(keyword) ||
+      expense.category?.toLowerCase().includes(keyword) ||
+      expense.description?.toLowerCase().includes(keyword) ||
+      expense.date?.toLowerCase().includes(keyword) ||
+      String(expense.amount).includes(keyword)
+    );
+  });
+}, [expenses, searchTerm]);
+
 
   // Fetch all expense records from backend
   const fetchExpenses = async () => {
@@ -172,17 +197,32 @@ function App() {
     setError("");
 
     // Basic front-end validation for required fields
-    if (!formData.title || !formData.category || !formData.amount || !formData.date) {
+    if (
+      !formData.title.trim() ||
+      !formData.category.trim() ||
+      !formData.amount ||
+      !formData.date
+    ) {
       setError("Please fill in all required fields.");
+      return;
+    }
+
+    const amountValue = Number(formData.amount);
+
+    if (Number.isNaN(amountValue) || amountValue <= 0) {
+      setError("Amount must be greater than 0.");
       return;
     }
 
     try {
       // Create a payload object to send to backend
-      // Convert amount from string to number
+      // Convert amount from string to number and remove extra spaces from text fields
       const payload = {
-        ...formData,
-        amount: Number(formData.amount),
+        title: formData.title.trim(),
+        category: formData.category.trim(),
+        amount: amountValue,
+        date: formData.date,
+        description: formData.description.trim(),
       };
 
       // If editingId exists, update an existing record
@@ -322,17 +362,28 @@ function App() {
           <div className="section-head">
             <h2>Expense List</h2>
             <span className="section-count">
-              {expenses.length} item{expenses.length === 1 ? "" : "s"}
+              {filteredExpenses.length} item{filteredExpenses.length === 1 ? "" : "s"}
             </span>
           </div>
 
+          <div className="search-box">
+            <input
+              type="text"
+              placeholder="Search by title, category, amount, date, or description..."
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+            />
+          </div>
+
           {/* Show empty state if there are no expenses */}
-          {expenses.length === 0 ? (
-            <div className="empty-state">No expenses yet.</div>
+          {filteredExpenses.length === 0 ? (
+            <div className="empty-state">
+              {expenses.length === 0 ? "No expenses yet." : "No matching expenses found."}
+            </div>
           ) : (
             <div className="expense-list">
               {/* Loop through all expenses and render each item */}
-              {expenses.map((expense) => (
+              {filteredExpenses.map((expense) => (
                 <div className="expense-item" key={expense._id}>
                   <div className="expense-content">
                     <div className="expense-top">
