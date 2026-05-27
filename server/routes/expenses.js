@@ -14,26 +14,27 @@ const {
   getMonthlySummary,
 } = require("../controllers/expenseController");
 
+const { protect } = require("../middleware/authMiddleware");
 
 // Route: Create a new expense
 // POST /api/expenses
-router.post("/", createExpense);
+router.post("/", protect, createExpense);
 
 // Route: Get all expenses
 // GET /api/expenses
-router.get("/", getAllExpenses);
+router.get("/", protect, getAllExpenses);
 
 // Route: Get category summary
 // GET /api/expenses/summary/category
-router.get("/summary/category", getCategorySummary);
+router.get("/summary/category", protect, getCategorySummary);
 
 // Route: Get monthly summary
 // GET /api/expenses/summary/monthly
-router.get("/summary/monthly", getMonthlySummary);
+router.get("/summary/monthly", protect, getMonthlySummary);
 
 // Route: Update an expense by ID
 // PUT /api/expenses/:id
-router.put("/:id", updateExpense);
+router.put("/:id", protect, updateExpense);
 
 // Route: Delete an expense by ID
 // DELETE /api/expenses/:id

@@ -15,6 +15,7 @@ const createExpense = async (req, res) => {
 
     // Create a new Expense document
     const newExpense = new Expense({
+      user: req.user._id,
       title,
       category,
       amount,
@@ -38,8 +39,7 @@ const createExpense = async (req, res) => {
 const getAllExpenses = async (req, res) => {
   try {
     // Find all records and sort by newest first
-    const expenses = await Expense.find().sort({ createdAt: -1 });
-
+    const expenses = await Expense.find({ user: req.user._id }).sort({ createdAt: -1 });
     // Return data to frontend
     res.status(200).json(expenses);
   } catch (error) {
@@ -55,10 +55,14 @@ const updateExpense = async (req, res) => {
     const { id } = req.params;
 
     // Find the document by id and update it
-    const updatedExpense = await Expense.findByIdAndUpdate(id, req.body, {
-      new: true,          // Return updated document instead of old one
-      runValidators: true // Apply schema validation during update
-    });
+    const updatedExpense = await Expense.findOneAndUpdate(
+      { _id: id, user: req.user._id },
+      req.body,
+      {
+        new: true,
+        runValidators: true,
+      }
+    );
 
     // If no matching document found
     if (!updatedExpense) {
@@ -79,7 +83,10 @@ const deleteExpense = async (req, res) => {
     const { id } = req.params;
 
     // Remove the document from database
-    const deletedExpense = await Expense.findByIdAndDelete(id);
+    const deletedExpense = await Expense.findOneAndDelete({
+      _id: id,
+      user: req.user._id,
+    });
 
     // If no matching document found
     if (!deletedExpense) {
@@ -100,12 +107,15 @@ const getCategorySummary = async (req, res) => {
     // Use MongoDB aggregation pipeline
     const summary = await Expense.aggregate([
       {
+        $match: { user: req.user._id },
+      },
+      {
         $group: {
-          _id: "$category",          // Group by category field
-          total: { $sum: "$amount" } // Sum all amounts in each category
+          _id: "$category",
+          total: { $sum: "$amount" },
         },
       },
-      { $sort: { total: -1 } },      // Sort from highest to lowest
+      { $sort: { total: -1 } },
     ]);
 
     res.status(200).json(summary);
@@ -119,7 +129,7 @@ const getCategorySummary = async (req, res) => {
 const getMonthlySummary = async (req, res) => {
   try {
     // Fetch all expenses from database
-    const expenses = await Expense.find();
+    const expenses = await Expense.find({ user: req.user._id });
 
     const monthlyMap = {}; // Object to store month -> total
 

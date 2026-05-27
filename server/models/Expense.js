@@ -4,6 +4,12 @@ const mongoose = require("mongoose");
 // Define schema (structure of each expense document in the database)
 const expenseSchema = new mongoose.Schema(
   {
+    user: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+      required: true,
+    },
+
     // Expense title (e.g. Lunch, Taxi)
     title: {
       type: String,   // Must be a string
