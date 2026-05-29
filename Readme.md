@@ -1,5 +1,14 @@
  My Expense Tracker
 
+
+Teammate
+
+Longfei Du 24670503
+
+Lingxiao Wang 25466044
+
+Wenxin Liu 24604555
+
  Project Overview
 
 My Expense Tracker is a full-stack Single Page Application (SPA) that allows users to record, manage, search, and analyze personal expenses.
