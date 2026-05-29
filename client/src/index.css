@@ -7,20 +7,20 @@
 
 /* Global CSS variables used across the page */
 :root {
-  --bg: #f3f6fb; /* Main page background color */
-  --card: rgba(255, 255, 255, 0.92); /* Card background with slight transparency */
-  --text: #1f2937; /* Main text color */
-  --muted: #6b7280; /* Secondary / muted text color */
-  --primary: #4f46e5; /* Primary brand color */
-  --primary-hover: #4338ca; /* Primary button hover color */
-  --danger: #dc2626; /* Delete button color */
-  --danger-hover: #b91c1c; /* Delete button hover color */
-  --secondary: #64748b; /* Secondary button color */
-  --secondary-hover: #475569; /* Secondary button hover color */
-  --edit: #2563eb; /* Edit button color */
-  --edit-hover: #1d4ed8; /* Edit button hover color */
-  --border: #e5e7eb; /* Default border color */
-  --shadow: 0 14px 38px rgba(15, 23, 42, 0.08); /* Reusable card shadow */
+  --bg: #f3f6fb; 
+  --card: rgba(255, 255, 255, 0.92); 
+  --text: #1f2937;
+  --muted: #6b7280;
+  --primary: #4f46e5;
+  --primary-hover: #4338ca;
+  --danger: #dc2626;
+  --danger-hover: #b91c1c;
+  --secondary: #64748b;
+  --secondary-hover: #475569;
+  --edit: #2563eb;
+  --edit-hover: #1d4ed8;
+  --border: #e5e7eb;
+  --shadow: 0 14px 38px rgba(15, 23, 42, 0.08);
 }
 
 /* Page-level styling */
@@ -33,96 +33,96 @@ body {
     radial-gradient(circle at top right, #ede9fe 0%, transparent 30%),
     var(--bg);
 
-  font-family: "Segoe UI", Arial, sans-serif; /* Default font */
-  color: var(--text); /* Default text color */
+  font-family: "Segoe UI", Arial, sans-serif; 
+  color: var(--text); 
 }
 
 /* Main app container */
 .app {
-  max-width: 1240px; /* Limit page width */
-  margin: 0 auto; /* Center horizontally */
-  padding: 36px 20px 48px; /* Outer spacing */
+  max-width: 1240px;
+  margin: 0 auto; 
+  padding: 36px 20px 48px; 
 }
 
 /* Header section */
 .header {
-  text-align: center; /* Center all header content */
-  margin-bottom: 26px; /* Space below header */
+  text-align: center; 
+  margin-bottom: 26px; 
 }
 
 /* Small pill badge above the title */
 .header-badge {
-  display: inline-block; /* Keep it pill-sized instead of full width */
-  background: rgba(79, 70, 229, 0.1); /* Light purple background */
-  color: var(--primary); /* Purple text */
-  border: 1px solid rgba(79, 70, 229, 0.15); /* Soft border */
-  padding: 8px 14px; /* Inner spacing */
-  border-radius: 999px; /* Fully rounded pill shape */
-  font-size: 0.88rem; /* Slightly smaller text */
-  font-weight: 700; /* Bold text */
-  margin-bottom: 14px; /* Space below badge */
+  display: inline-block; 
+  background: rgba(79, 70, 229, 0.1); 
+  color: var(--primary); 
+  border: 1px solid rgba(79, 70, 229, 0.15); 
+  padding: 8px 14px; 
+  border-radius: 999px; 
+  font-size: 0.88rem; 
+  font-weight: 700; 
+  margin-bottom: 14px; 
 }
 
 /* Main page title */
 .header h1 {
-  font-size: 2.7rem; /* Large heading size */
-  font-weight: 800; /* Heavy font weight */
-  letter-spacing: -0.02em; /* Slightly tighter letter spacing */
-  margin-bottom: 10px; /* Space below title */
+  font-size: 2.7rem; 
+  font-weight: 800; 
+  letter-spacing: -0.02em; 
+  margin-bottom: 10px; 
 }
 
 /* Header subtitle */
 .header p {
-  color: var(--muted); /* Muted text color */
-  font-size: 1.05rem; /* Slightly larger body text */
+  color: var(--muted); 
+  font-size: 1.05rem; 
 }
 
 /* Top statistics layout */
 .stats-grid {
-  display: grid; /* Use CSS grid layout */
-  grid-template-columns: repeat(3, 1fr); /* Three equal-width columns */
-  gap: 18px; /* Space between cards */
-  margin-bottom: 22px; /* Space below stats section */
+  display: grid; 
+  grid-template-columns: repeat(3, 1fr); 
+  gap: 18px; 
+  margin-bottom: 22px; 
 }
 
 /* Individual statistic card */
 .stat-card {
-  background: linear-gradient(135deg, #ffffff, #f8fbff); /* Light gradient background */
-  border: 1px solid rgba(255, 255, 255, 0.9); /* Soft border */
-  border-radius: 20px; /* Rounded corners */
-  padding: 20px; /* Inner spacing */
-  box-shadow: var(--shadow); /* Reuse global shadow */
+  background: linear-gradient(135deg, #ffffff, #f8fbff); 
+  border: 1px solid rgba(255, 255, 255, 0.9); 
+  border-radius: 20px; 
+  padding: 20px; 
+  box-shadow: var(--shadow); 
 }
 
 /* Small label inside each stat card */
 .stat-label {
-  display: block; /* Put label on its own line */
-  font-size: 0.95rem; /* Slightly smaller than value */
-  color: var(--muted); /* Muted text color */
-  margin-bottom: 8px; /* Space below label */
+  display: block; 
+  font-size: 0.95rem; 
+  color: var(--muted); 
+  margin-bottom: 8px; 
 }
 
 /* Main number inside each stat card */
 .stat-value {
-  font-size: 1.8rem; /* Larger text for emphasis */
-  font-weight: 800; /* Bold number */
+  font-size: 1.8rem; 
+  font-weight: 800; 
 }
 
 /* Main two-column layout */
 .main-grid {
-  display: grid; /* Use grid layout */
-  grid-template-columns: 1fr 1fr; /* Two equal columns */
-  gap: 22px; /* Space between sections */
+  display: grid; 
+  grid-template-columns: 1fr 1fr; 
+  gap: 22px; 
 }
 
 /* Shared card style */
 .card {
-  background: var(--card); /* Use semi-transparent card background */
-  backdrop-filter: blur(10px); /* Add glassmorphism blur effect */
-  border: 1px solid rgba(255, 255, 255, 0.7); /* Soft border */
-  border-radius: 24px; /* Rounded corners */
-  padding: 22px; /* Inner spacing */
-  box-shadow: var(--shadow); /* Global card shadow */
+  background: var(--card); 
+  backdrop-filter: blur(10px); 
+  border: 1px solid rgba(255, 255, 255, 0.7); 
+  border-radius: 24px; 
+  padding: 22px; 
+  box-shadow: var(--shadow); 
 
   /* Smooth hover animation */
   transition: transform 0.25s ease,
@@ -132,9 +132,9 @@ body {
 
 /* Card hover effect */
 .card:hover {
-  transform: translateY(-6px) scale(1.01); /* Lift slightly and enlarge a bit */
-  box-shadow: 0 20px 50px rgba(15, 23, 42, 0.15); /* Stronger shadow on hover */
-  border-color: rgba(79, 70, 229, 0.25); /* Highlight border slightly */
+  transform: translateY(-6px) scale(1.01); 
+  box-shadow: 0 20px 50px rgba(15, 23, 42, 0.15); 
+  border-color: rgba(79, 70, 229, 0.25); 
 }
 
 /* Section title inside card */
@@ -145,80 +145,80 @@ body {
 
 /* Header row for sections like Expense List and Summary */
 .section-head {
-  display: flex; /* Put title and count on same row */
-  justify-content: space-between; /* Push them apart */
-  align-items: center; /* Vertically align them */
-  margin-bottom: 18px; /* Space below row */
+  display: flex; 
+  justify-content: space-between; 
+  align-items: center; 
+  margin-bottom: 18px; 
 }
 
 /* Small rounded counter label */
 .section-count {
-  font-size: 0.9rem; /* Small text */
-  color: var(--muted); /* Muted color */
-  background: #f8fafc; /* Light background */
-  border: 1px solid var(--border); /* Soft border */
-  padding: 6px 10px; /* Inner spacing */
-  border-radius: 999px; /* Rounded pill */
+  font-size: 0.9rem; 
+  color: var(--muted); 
+  background: #f8fafc; 
+  border: 1px solid var(--border); 
+  padding: 6px 10px; 
+  border-radius: 999px; 
 }
 
 /* Expense form layout */
 .expense-form {
-  display: flex; /* Use flex layout */
-  flex-direction: column; /* Stack inputs vertically */
-  gap: 14px; /* Space between fields */
+  display: flex; 
+  flex-direction: column; 
+  gap: 14px; 
 }
 
 /* Shared styles for form inputs and textarea */
 .expense-form input,
 .expense-form textarea {
-  width: 100%; /* Fill available width */
-  padding: 14px 16px; /* Inner spacing */
-  border: 1px solid var(--border); /* Default border */
-  border-radius: 14px; /* Rounded corners */
-  font-size: 1rem; /* Normal text size */
-  background: #ffffff; /* White background */
-  color: var(--text); /* Main text color */
-  outline: none; /* Remove default outline */
-  transition: border-color 0.2s ease, box-shadow 0.2s ease; /* Smooth focus effect */
+  width: 100%; 
+  padding: 14px 16px; 
+  border: 1px solid var(--border); 
+  border-radius: 14px; 
+  font-size: 1rem; 
+  background: #ffffff; 
+  color: var(--text); 
+  outline: none; 
+  transition: border-color 0.2s ease, box-shadow 0.2s ease; 
 }
 
 /* Focus state for inputs and textarea */
 .expense-form input:focus,
 .expense-form textarea:focus {
-  border-color: var(--primary); /* Highlight border */
-  box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.12); /* Soft glow */
+  border-color: var(--primary); 
+  box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.12); 
 }
 
 /* Textarea-specific styling */
 .expense-form textarea {
-  min-height: 96px; /* Minimum height */
-  resize: vertical; /* Allow vertical resize only */
+  min-height: 96px; 
+  resize: vertical; 
 }
 
 /* Button container under form */
 .button-row {
-  display: flex; /* Put buttons in a row */
-  gap: 12px; /* Space between buttons */
-  margin-top: 6px; /* Small space above button row */
-  flex-wrap: wrap; /* Wrap if space is too small */
+  display: flex; 
+  gap: 12px; 
+  margin-top: 6px; 
+  flex-wrap: wrap; 
 }
 
 /* Button group inside each expense item */
 .button-column {
-  display: flex; /* Put buttons side by side */
-  gap: 10px; /* Space between buttons */
-  align-items: center; /* Align vertically */
+  display: flex; 
+  gap: 10px; 
+  align-items: center; 
 }
 
 /* Base style for all buttons */
 button {
-  border: none; /* Remove default border */
-  border-radius: 14px; /* Rounded corners */
-  padding: 12px 18px; /* Inner spacing */
-  font-size: 0.96rem; /* Text size */
-  font-weight: 700; /* Bold text */
-  cursor: pointer; /* Show pointer on hover */
-  color: white; /* White button text */
+  border: none; 
+  border-radius: 14px; 
+  padding: 12px 18px; 
+  font-size: 0.96rem; 
+  font-weight: 700; 
+  cursor: pointer; 
+  color: white; 
   transition: transform 0.15s ease, background 0.2s ease, opacity 0.2s ease; /* Smooth interaction */
 }
 
@@ -265,21 +265,21 @@ button:hover {
 
 /* Expense list container */
 .expense-list {
-  display: flex; /* Use flex layout */
-  flex-direction: column; /* Stack items vertically */
-  gap: 14px; /* Space between items */
+  display: flex; 
+  flex-direction: column; 
+  gap: 14px; 
 }
 
 /* Single expense card inside list */
 .expense-item {
-  border: 1px solid var(--border); /* Border around item */
-  border-radius: 18px; /* Rounded corners */
-  padding: 16px; /* Inner spacing */
-  background: #ffffff; /* White background */
-  display: flex; /* Put content and buttons in one row */
-  justify-content: space-between; /* Separate content and action buttons */
-  align-items: flex-start; /* Align to top */
-  gap: 16px; /* Space between content and buttons */
+  border: 1px solid var(--border); 
+  border-radius: 18px; 
+  padding: 16px; 
+  background: #ffffff; 
+  display: flex; 
+  justify-content: space-between; 
+  align-items: flex-start; 
+  gap: 16px; 
 }
 
 /* Left side content inside expense item */
@@ -289,109 +289,109 @@ button:hover {
 
 /* Top row inside expense item (title + category) */
 .expense-top {
-  display: flex; /* Row layout */
-  align-items: center; /* Vertical alignment */
-  gap: 10px; /* Space between title and category */
-  margin-bottom: 8px; /* Space below row */
-  flex-wrap: wrap; /* Wrap if needed */
+  display: flex;
+  align-items: center;
+  gap: 10px; 
+  margin-bottom: 8px; 
+  flex-wrap: wrap; 
 }
 
 /* Expense item title */
 .expense-item h3 {
-  font-size: 1.25rem; /* Slightly larger heading */
-  font-weight: 800; /* Bold */
+  font-size: 1.25rem; 
+  font-weight: 800; 
 }
 
 /* Category label pill */
 .category-pill {
-  display: inline-flex; /* Inline flex for centering */
-  align-items: center; /* Center vertically */
-  justify-content: center; /* Center horizontally */
-  padding: 6px 10px; /* Inner spacing */
-  border-radius: 999px; /* Rounded pill */
-  background: rgba(79, 70, 229, 0.1); /* Light purple background */
-  color: var(--primary); /* Purple text */
-  font-size: 0.85rem; /* Small text */
-  font-weight: 700; /* Bold text */
+  display: inline-flex; 
+  align-items: center; 
+  justify-content: center; 
+  padding: 6px 10px; 
+  border-radius: 999px; 
+  background: rgba(79, 70, 229, 0.1); 
+  color: var(--primary); 
+  font-size: 0.85rem; 
+  font-weight: 700; 
 }
 
 /* Expense amount text */
 .expense-amount {
-  font-size: 1.1rem; /* Slightly larger amount text */
-  font-weight: 700; /* Bold */
-  margin-bottom: 6px; /* Space below amount */
+  font-size: 1.1rem; 
+  font-weight: 700; 
+  margin-bottom: 6px;
 }
 
 /* Paragraph text inside expense item */
 .expense-item p {
-  margin-bottom: 5px; /* Small spacing between lines */
-  color: #374151; /* Dark grey text */
-  line-height: 1.45; /* Better readability */
+  margin-bottom: 5px; 
+  color: #374151; 
+  line-height: 1.45; 
 }
 
 /* Category summary list */
 .summary-list {
-  display: flex; /* Use flex layout */
-  flex-direction: column; /* Stack rows vertically */
-  gap: 14px; /* Space between summary rows */
+  display: flex; 
+  flex-direction: column; 
+  gap: 14px; 
 }
 
 /* Single summary row */
 .summary-row {
-  display: flex; /* Row layout */
-  align-items: center; /* Vertical alignment */
-  justify-content: space-between; /* Push label and value apart */
-  background: #ffffff; /* White background */
-  border: 1px solid var(--border); /* Border */
-  border-radius: 16px; /* Rounded corners */
-  padding: 14px 16px; /* Inner spacing */
+  display: flex; 
+  align-items: center; 
+  justify-content: space-between; 
+  background: #ffffff; 
+  border: 1px solid var(--border); 
+  border-radius: 16px; 
+  padding: 14px 16px; 
 }
 
 /* Left section of summary row */
 .summary-left {
-  display: flex; /* Put dot and label in one row */
-  align-items: center; /* Vertical alignment */
-  gap: 10px; /* Space between dot and label */
-  font-weight: 600; /* Medium-bold text */
+  display: flex; 
+  align-items: center; 
+  gap: 10px; 
+  font-weight: 600; 
 }
 
 /* Colored dot used in category summary */
 .summary-dot {
-  width: 12px; /* Dot width */
-  height: 12px; /* Dot height */
-  border-radius: 999px; /* Make it a circle */
+  width: 12px; 
+  height: 12px; 
+  border-radius: 999px; 
 }
 
 /* Extra height for chart card */
 .chart-card {
-  min-height: 360px; /* Keep enough vertical space */
+  min-height: 360px; 
 }
 
 /* Wrapper around chart */
 .chart-wrapper {
-  width: 100%; /* Full card width */
-  height: 300px; /* Fixed chart height */
-  margin-top: 8px; /* Space above chart */
+  width: 100%; 
+  height: 300px; 
+  margin-top: 8px; 
 }
 
 /* Empty state box */
 .empty-state {
-  display: flex; /* Use flexbox */
-  align-items: center; /* Center vertically */
-  justify-content: center; /* Center horizontally */
-  min-height: 140px; /* Minimum height */
-  border: 1px dashed var(--border); /* Dashed border for placeholder style */
-  border-radius: 18px; /* Rounded corners */
-  background: rgba(255, 255, 255, 0.7); /* Semi-transparent background */
-  color: var(--muted); /* Muted text color */
-  font-weight: 600; /* Slightly bold text */
+  display: flex; 
+  align-items: center; 
+  justify-content: center; 
+  min-height: 140px; 
+  border: 1px dashed var(--border);
+  border-radius: 18px; 
+  background: rgba(255, 255, 255, 0.7); 
+  color: var(--muted); 
+  font-weight: 600; 
 }
 
 /* Error message styling */
 .error-text {
-  color: #b91c1c; /* Red text */
-  margin-top: 10px; /* Space above message */
-  font-weight: 600; /* Slightly bold */
+  color: #b91c1c; 
+  margin-top: 10px;
+  font-weight: 600; 
 }
 
 /* Tablet and smaller screens */
@@ -448,3 +448,82 @@ button:hover {
   border-color: var(--primary);
   box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.12);
 }
+
+.admin-card {
+  grid-column: 1 / -1;
+}
+
+.admin-subtitle {
+  color: var(--muted);
+  margin-top: 6px;
+  font-weight: 500;
+}
+
+.activity-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.activity-item {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  background: #ffffff;
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  padding: 16px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.activity-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 32px rgba(15, 23, 42, 0.08);
+}
+
+.activity-icon {
+  width: 42px;
+  height: 42px;
+  border-radius: 14px;
+  background: rgba(79, 70, 229, 0.12);
+  color: var(--primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  flex-shrink: 0;
+}
+
+.activity-content {
+  flex: 1;
+}
+
+.activity-top {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  align-items: center;
+  margin-bottom: 6px;
+  flex-wrap: wrap;
+}
+
+.activity-action {
+  background: rgba(79, 70, 229, 0.1);
+  color: var(--primary);
+  padding: 6px 10px;
+  border-radius: 999px;
+  font-size: 0.82rem;
+  font-weight: 800;
+}
+
+.activity-content p {
+  color: #374151;
+  margin-bottom: 8px;
+}
+
+.activity-time {
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+

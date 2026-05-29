@@ -1,6 +1,7 @@
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const User = require("../models/User");
+const { createActivity } = require("./activityController");
 
 const createToken = (user) => {
   return jwt.sign(
@@ -41,6 +42,8 @@ const registerUser = async (req, res) => {
 
     const savedUser = await newUser.save();
 
+    await createActivity(savedUser, "REGISTER", "User registered a new account.");
+
     const token = createToken(savedUser);
 
     res.status(201).json({
@@ -77,6 +80,8 @@ const loginUser = async (req, res) => {
     if (!isMatch) {
       return res.status(401).json({ message: "Invalid email or password." });
     }
+
+    await createActivity(user, "LOGIN", "User logged in.");
 
     const token = createToken(user);
 

@@ -1,79 +1,419 @@
-# My Expense Tracker
+ My Expense Tracker
 
-## Project Summary
-My Expense Tracker is a single-page web application that allows users to record, manage, and analyze their personal expenses. It provides a clean and simple dashboard to help users understand their spending habits.
+ Project Overview
 
-## Problem Statement
-Managing daily expenses manually can be inconvenient and unclear. This application helps users track spending in one place and visualize their financial habits through summaries and charts.
+My Expense Tracker is a full-stack Single Page Application (SPA) that allows users to record, manage, search, and analyze personal expenses.
 
-## Tech Stack
-- Frontend: React (Vite)
-- Backend: Node.js + Express
-- Database: MongoDB (Local)
-- HTTP Client: Axios
-- Charts: Recharts
+The project was developed using React, Node.js, Express, and MongoDB. It provides a modern dashboard for expense management while also supporting user authentication, activity tracking, and administrator monitoring features.
 
-## Features
-- Single-page application (SPA)
-- Add new expenses
-- Edit existing expenses
+The system allows different users to maintain their own expense records securely and provides administrators with tools to monitor system activities.
+
+
+
+ Problem Statement
+
+Managing daily expenses manually can be difficult and time-consuming. Many users struggle to keep track of spending habits and identify where money is being spent.
+
+This application provides a centralized platform where users can:
+
+- Record expenses
+- Manage expense records
+- Analyze spending habits
+- Search expenses instantly
+- Visualize financial data
+- Securely manage personal accounts
+
+The goal is to make personal finance management easier, more organized, and more accessible.
+
+
+
+ Technologies Used
+
+ Frontend
+
+- React
+- Vite
+- Axios
+- Recharts
+
+ Backend
+
+- Node.js
+- Express.js
+
+ Database
+
+- MongoDB
+- Mongoose
+
+ Authentication & Security
+
+- JSON Web Token (JWT)
+- bcryptjs Password Hashing
+
+
+
+ Features
+
+ Authentication
+
+- User Registration
+- User Login
+- Password Hashing with bcrypt
+- JWT Authentication
+- Protected API Routes
+
+ User Management
+
+ Standard User
+
+Regular users can:
+
+- Register an account
+- Login securely
+- Create expenses
+- View their own expenses
+- Update expenses
 - Delete expenses
-- View expense list
-- Category summary
-- Monthly summary chart
-- Total expense overview
-- Category color labels
-- Responsive UI design
+- Search expenses in real time
+- View financial summaries and charts
 
-## Folder Structure
+ Administrator
+
+Administrators can:
+
+- Access the Admin Dashboard
+- View user activity logs
+- Monitor system usage
+- Review login history
+- Monitor CRUD operations
+
+ Expense Management
+
+- Create Expense
+- Read Expense
+- Update Expense
+- Delete Expense
+
+ Live Search
+
+Real-time filtering of expenses by:
+
+- Title
+- Category
+- Amount
+- Date
+- Description
+
+ Data Visualization
+
+- Total Expense Overview
+- Category Summary
+- Monthly Expense Summary
+- Interactive Charts
+
+ User Activity Tracking
+
+The system automatically records:
+
+- Login Activity
+- Expense Creation
+- Expense Updates
+- Expense Deletion
+
+ Admin Dashboard
+
+The Admin Dashboard provides:
+
+- User activity monitoring
+- Activity history tracking
+- CRUD operation records
+- Login history review
+
+---
+
+ Folder Structure
+
+
 expense-tracker/
-├── client/ (React frontend)
-├── server/ (Express backend)
-├── sample-data.json (example data)
+
+├── client/
+│   ├── src/
+│   ├── components/
+│   ├── services/
+│   ├── App.jsx
+│   └── main.jsx
+│
+├── server/
+│   ├── controllers/
+│   ├── middleware/
+│   ├── models/
+│   ├── routes/
+│   ├── .env
+│   └── server.js
+│
+├── sample-data.json
 └── README.md
 
-## How to Run the Project
 
-1. Install backend dependencies  
-cd server  
-npm install  
 
-2. Install frontend dependencies  
-cd client  
-npm install  
 
-3. Start backend server  
-cd server  
-npm run dev  
+ Database Collections
 
-4. Start frontend  
-cd client  
-npm run dev  
+ Users
 
-5. Open in browser  
-http://localhost:5173  
+Stores user account information.
 
-## Database Setup
-This project uses a local MongoDB database.
+Fields:
 
-Connection:
-mongodb://localhost:27017/expenseTracker
+- username
+- email
+- password (hashed)
+- role
 
-Make sure MongoDB is installed and running before starting the server.
+Example:
 
-If MongoDB is not available, example data is provided in sample-data.json.
 
-If MongoDB is not running, the application UI can still be viewed, but CRUD functionality will not work. Sample data is provided in sample-data.json for reference.
+{
+  "username": "admin",
+  "email": "admin@test.com",
+  "password": "hashed_password",
+  "role": "admin"
+}
 
-## Data Format
-Date format used in this project:
-YYYY-MM-DD
 
-## Challenges Overcome
-During development, I found it a bit challenging to connect the frontend, backend, and database properly.
-I also needed to figure out how to update data without refreshing the page, so the app behaves like a single-page application.
-Besides that, I worked on improving the UI by adding summary cards, charts, and category color labels to make it more clear and user-friendly.
+ Expenses
 
-## Notes
-This project is designed as a simple and functional expense tracking system. The structure is modular and can be extended with features such as authentication, filtering, or cloud database integration.
+Stores expense records.
 
+Fields:
+
+- user
+- title
+- category
+- amount
+- date
+- description
+
+Example:
+
+
+{
+  "title": "Pizza",
+  "category": "Food",
+  "amount": 25,
+  "date": "2026-05-20",
+  "description": "Dinner"
+}
+
+
+ User Activities
+
+Stores activity logs.
+
+Fields:
+
+- username
+- action
+- detail
+- createdAt
+
+Example:
+
+
+{
+  "username": "admin",
+  "action": "DELETE_EXPENSE",
+  "detail": "Deleted expense: Pizza"
+}
+
+
+
+
+ Installation Guide
+
+ 1. Clone Repository
+
+
+git clone <repository-url>
+
+
+ 2. Install Backend Dependencies
+
+
+cd server
+npm install
+
+
+ 3. Install Frontend Dependencies
+
+
+cd client
+npm install
+
+
+ 4. Configure Environment Variables
+
+Create a `.env` file inside the server folder:
+
+
+PORT=5000
+
+MONGO_URI=mongodb://localhost:27017/expenseTracker
+
+JWT_SECRET=your_secret_key
+
+ 5. Start Backend Server
+
+
+cd server
+npm run dev
+
+
+ 6. Start Frontend
+
+
+cd client
+npm run dev
+
+
+ 7. Open Application
+
+
+http://localhost:5173
+
+
+
+ Test Accounts
+
+ Administrator
+
+
+Email:
+admin@test.com
+
+Password:
+123456
+
+
+ Standard User
+
+
+Email:
+test@test.com
+
+Password:
+123456
+
+
+
+
+ API Endpoints
+
+ Authentication
+
+
+POST /api/auth/register
+
+
+Register a new user.
+
+
+POST /api/auth/login
+
+
+Login and receive JWT token.
+
+
+
+ Expenses
+
+
+GET /api/expenses
+
+
+Get all expenses.
+
+
+POST /api/expenses
+
+
+Create a new expense.
+
+
+PUT /api/expenses/:id
+
+
+Update an expense.
+
+
+DELETE /api/expenses/:id
+
+
+Delete an expense.
+
+
+ Summaries
+
+
+GET /api/expenses/summary/category
+
+
+Get category summary.
+
+
+GET /api/expenses/summary/monthly
+
+
+Get monthly summary.
+
+
+
+ Activities
+
+
+GET /api/activities
+
+
+Get activity logs (Admin only).
+
+
+
+ Challenges Faced
+
+During development several challenges were encountered:
+
+- Connecting React, Express, and MongoDB together
+- Implementing JWT authentication
+- Securing API routes with middleware
+- Managing state without page refreshes
+- Recording user activities automatically
+- Building an Admin Dashboard
+- Implementing real-time search functionality
+- Maintaining SPA behaviour while updating data dynamically
+
+
+
+ Future Improvements
+
+Potential future enhancements include:
+
+- User profile editing
+- Password reset functionality
+- Budget planning features
+- Expense export to PDF
+- MongoDB Atlas cloud deployment
+- Role-based permission expansion
+- Advanced analytics dashboard
+- Email verification
+- Dark Mode support
+
+
+
+ Conclusion
+
+My Expense Tracker demonstrates the development of a modern full-stack web application using React, Express, Node.js, and MongoDB.
+
+The project includes secure authentication, expense management, live searching, activity tracking, and administrative monitoring features while maintaining a responsive and user-friendly interface.
+
+This project showcases both frontend and backend development skills as well as database integration and authentication implementation.

@@ -9,6 +9,9 @@ const expenseRoutes = require("./routes/expenses");
 // Import auth routes
 const authRoutes = require("./routes/auth");
 
+// Import activity routes
+const activityRoutes = require("./routes/activities");
+
 dotenv.config();
 
 const app = express();
@@ -30,11 +33,16 @@ app.use("/api/expenses", expenseRoutes);
 // Auth API routes
 app.use("/api/auth", authRoutes);
 
+// Activity API routes
+app.use("/api/activities", activityRoutes);
+
+// Connect to MongoDB
 mongoose
   .connect(process.env.MONGO_URI)
   .then(() => {
     console.log("MongoDB connected successfully.");
 
+    // Start backend server
     app.listen(process.env.PORT, () => {
       console.log(`Server running on port ${process.env.PORT}`);
     });

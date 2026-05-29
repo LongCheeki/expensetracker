@@ -2,7 +2,10 @@
 // useState is used to store and update component state
 // useEffect is used to run code when the component loads
 // useMemo is used to memoize values that do not need recalculating on every render
+import AdminDashboard from "./AdminDashboard";
+
 import { useEffect, useMemo, useState } from "react";
+
 
 // Import chart components from Recharts library
 // These are used to display the monthly spending chart
@@ -24,6 +27,20 @@ import api from "./services/api";
 import "./index.css";
 
 function App() {
+
+  const [user, setUser] = useState(() => {
+  const savedUser = localStorage.getItem("user");
+  return savedUser ? JSON.parse(savedUser) : null;
+});
+
+const [authMode, setAuthMode] = useState("login");
+
+const [authForm, setAuthForm] = useState({
+  username: "",
+  email: "",
+  password: "",
+});
+
   // Store all expense records returned from the backend
   const [expenses, setExpenses] = useState([]);
 
@@ -166,6 +183,55 @@ function App() {
     refreshData();
   }, []);
 
+  const handleAuthChange = (e) => {
+  setAuthForm({
+    ...authForm,
+    [e.target.name]: e.target.value,
+  });
+};
+
+const handleAuthSubmit = async (e) => {
+  e.preventDefault();
+  setError("");
+
+  try {
+    const endpoint = authMode === "login" ? "/auth/login" : "/auth/register";
+
+    const payload =
+      authMode === "login"
+        ? {
+            email: authForm.email,
+            password: authForm.password,
+          }
+        : authForm;
+
+    const res = await api.post(endpoint, payload);
+
+    localStorage.setItem("token", res.data.token);
+    localStorage.setItem("user", JSON.stringify(res.data.user));
+
+    setUser(res.data.user);
+    setAuthForm({
+      username: "",
+      email: "",
+      password: "",
+    });
+
+    refreshData();
+  } catch {
+    setError("Authentication failed.");
+  }
+};
+
+const handleLogout = () => {
+  localStorage.removeItem("token");
+  localStorage.removeItem("user");
+  setUser(null);
+  setExpenses([]);
+  setCategorySummary([]);
+  setMonthlySummary([]);
+};
+
   // Handle input changes in the form
   // e.target.name identifies which input changed
   // e.target.value is the new value entered by the user
@@ -272,6 +338,61 @@ function App() {
     }
   };
 
+  if (!user) {
+  return (
+    <div className="app">
+      <section className="card form-card" style={{ maxWidth: "520px", margin: "80px auto" }}>
+        <h2>{authMode === "login" ? "Login" : "Register"}</h2>
+
+        <form onSubmit={handleAuthSubmit} className="expense-form">
+          {authMode === "register" && (
+            <input
+              type="text"
+              name="username"
+              placeholder="Username"
+              value={authForm.username}
+              onChange={handleAuthChange}
+            />
+          )}
+
+          <input
+            type="email"
+            name="email"
+            placeholder="Email"
+            value={authForm.email}
+            onChange={handleAuthChange}
+          />
+
+          <input
+            type="password"
+            name="password"
+            placeholder="Password"
+            value={authForm.password}
+            onChange={handleAuthChange}
+          />
+
+          <button type="submit" className="primary-btn">
+            {authMode === "login" ? "Login" : "Register"}
+          </button>
+        </form>
+
+        {error && <p className="error-text">{error}</p>}
+
+        <button
+          type="button"
+          className="secondary-btn"
+          style={{ marginTop: "14px" }}
+          onClick={() => setAuthMode(authMode === "login" ? "register" : "login")}
+        >
+          {authMode === "login"
+            ? "Need an account? Register"
+            : "Already have an account? Login"}
+        </button>
+      </section>
+    </div>
+  );
+}
+  
   return (
     <div className="app">
       {/* Page header */}
@@ -279,6 +400,11 @@ function App() {
         <div className="header-badge">My Finance Dashboard</div>
         <h1>My Expense Tracker</h1>
         <p>A simple way to track and understand your spending.</p>
+        <p>Logged in as: {user.username} ({user.role})</p>
+
+<button className="secondary-btn" onClick={handleLogout}>
+  Logout
+</button>
       </header>
 
       {/* Top summary cards */}
@@ -494,6 +620,8 @@ function App() {
             </div>
           )}
         </section>
+
+        <AdminDashboard token={localStorage.getItem("token")} />
       </main>
     </div>
   );

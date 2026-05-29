@@ -4,6 +4,7 @@ const express = require("express");
 // Create a router instance to define API routes
 const router = express.Router();
 
+
 // Import controller functions (these handle the actual logic)
 const {
   createExpense,
@@ -38,7 +39,7 @@ router.put("/:id", protect, updateExpense);
 
 // Route: Delete an expense by ID
 // DELETE /api/expenses/:id
-router.delete("/:id", deleteExpense);
+router.delete("/:id", protect, deleteExpense);
 
 // Export router so it can be used in server.js
 module.exports = router;

@@ -1,6 +1,9 @@
 // Import Expense model (used to interact with MongoDB)
 const Expense = require("../models/Expense");
 
+// Import createActivity helper to record user actions
+const { createActivity } = require("./activityController");
+
 
 // Create a new expense (POST request)
 const createExpense = async (req, res) => {
@@ -13,7 +16,7 @@ const createExpense = async (req, res) => {
       return res.status(400).json({ message: "Please fill in all required fields." });
     }
 
-    // Create a new Expense document
+    // Create a new Expense document and link it to the logged-in user
     const newExpense = new Expense({
       user: req.user._id,
       title,
@@ -25,6 +28,9 @@ const createExpense = async (req, res) => {
 
     // Save the new expense into database
     const savedExpense = await newExpense.save();
+
+    // Record user activity
+    await createActivity(req.user, "CREATE_EXPENSE", `Created expense: ${savedExpense.title}`);
 
     // Send back created data with 201 (created)
     res.status(201).json(savedExpense);
@@ -38,8 +44,9 @@ const createExpense = async (req, res) => {
 // Get all expenses (GET request)
 const getAllExpenses = async (req, res) => {
   try {
-    // Find all records and sort by newest first
+    // Find expenses that belong to the logged-in user and sort by newest first
     const expenses = await Expense.find({ user: req.user._id }).sort({ createdAt: -1 });
+
     // Return data to frontend
     res.status(200).json(expenses);
   } catch (error) {
@@ -54,7 +61,7 @@ const updateExpense = async (req, res) => {
     // Get id from URL (e.g. /expenses/:id)
     const { id } = req.params;
 
-    // Find the document by id and update it
+    // Find the document by id and user, then update it
     const updatedExpense = await Expense.findOneAndUpdate(
       { _id: id, user: req.user._id },
       req.body,
@@ -69,6 +76,9 @@ const updateExpense = async (req, res) => {
       return res.status(404).json({ message: "Expense not found." });
     }
 
+    // Record user activity
+    await createActivity(req.user, "UPDATE_EXPENSE", `Updated expense: ${updatedExpense.title}`);
+
     // Send updated data back
     res.status(200).json(updatedExpense);
   } catch (error) {
@@ -82,7 +92,7 @@ const deleteExpense = async (req, res) => {
   try {
     const { id } = req.params;
 
-    // Remove the document from database
+    // Remove the document from database only if it belongs to the logged-in user
     const deletedExpense = await Expense.findOneAndDelete({
       _id: id,
       user: req.user._id,
@@ -92,6 +102,9 @@ const deleteExpense = async (req, res) => {
     if (!deletedExpense) {
       return res.status(404).json({ message: "Expense not found." });
     }
+
+    // Record user activity
+    await createActivity(req.user, "DELETE_EXPENSE", `Deleted expense: ${deletedExpense.title}`);
 
     // Send success message
     res.status(200).json({ message: "Expense deleted successfully." });
@@ -107,14 +120,17 @@ const getCategorySummary = async (req, res) => {
     // Use MongoDB aggregation pipeline
     const summary = await Expense.aggregate([
       {
+        // Only include expenses from the logged-in user
         $match: { user: req.user._id },
       },
       {
+        // Group expenses by category
         $group: {
           _id: "$category",
           total: { $sum: "$amount" },
         },
       },
+      // Sort from highest total to lowest total
       { $sort: { total: -1 } },
     ]);
 
@@ -128,7 +144,7 @@ const getCategorySummary = async (req, res) => {
 // Get summary grouped by month (Manual processing)
 const getMonthlySummary = async (req, res) => {
   try {
-    // Fetch all expenses from database
+    // Fetch expenses that belong to the logged-in user
     const expenses = await Expense.find({ user: req.user._id });
 
     const monthlyMap = {}; // Object to store month -> total

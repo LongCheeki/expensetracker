@@ -17,7 +17,7 @@ const expenseSchema = new mongoose.Schema(
       trim: true,     // Remove extra spaces from input
     },
 
-    // Expense category (e.g. food, transport)
+    // Expense category
     category: {
       type: String,
       required: true,
