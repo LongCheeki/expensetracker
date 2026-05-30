@@ -7,7 +7,6 @@ Longfei Du 24670503
 
 Lingxiao Wang 25466044
 
-Wenxin Liu 24604555
 
  Project Overview
 
